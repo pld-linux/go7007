@@ -1,0 +1,16 @@
+--- wis-go7007-linux-0.9.6/hotplug/wis-ezusb.in~	2005-08-04 04:04:01.000000000 +0200
++++ wis-go7007-linux-0.9.6/hotplug/wis-ezusb.in	2005-08-28 20:02:17.147394816 +0200
+@@ -84,10 +84,11 @@
+ fi
+ 
+ $LOADER $FLAGS -I $FIRMWARE
++$RETVAL=$?
+ 
+-if [ $? -gt 0 ]; then
++if [ $RETVAL -gt 0 ]; then
+     if [ -x /usr/bin/logger ]; then
+-        /usr/bin/logger -t $0 "error $? returned by $LOADER $FLAGS -I $FIRMWARE"
++        /usr/bin/logger -t $0 "error $RETVAL returned by $LOADER $FLAGS -I $FIRMWARE"
+     fi
+     exit 1
+ fi
