@@ -1,0 +1,43 @@
+--- wis-go7007-linux-0.9.6-old/apps/gorecord.c	2005-08-04 22:02:27.000000000 +0200
++++ wis-go7007-linux-0.9.6/apps/gorecord.c	2005-08-30 01:58:10.586316272 +0200
+@@ -118,6 +118,7 @@
+ "                                  Bands: ntsc-bcast, ntsc-cable, ntsc-hrc,\n"
+ "                                         ntsc-bcast-jp, ntsc-cable-jp,\n"
+ "                                         europe, france, russia\n"
++"  -tvfreq <freq>                Tune to frequency <freq> (us this or -tvchan)\n"
+ "  -tvaudio <mode>               Select mode for TV audio (default: stereo)\n"
+ "                                  Modes: mono, stereo, lang1, lang2\n"
+ "Sensor controls:  (defaults listed in probe information)\n"
+@@ -183,7 +184,7 @@
+ 		fprintf(stderr, "Is the device connected properly?\n");
+ 		exit(1);
+ 	}
+-	sprintf(vdev, "/dev/video%d", i);
++	sprintf(vdev, "/dev/v4l/video%d", i);
+ 	vdevice = vdev;
+ 	fprintf(stderr, "%s is a GO7007 device at USB address %s\n",
+ 			vdev, strrchr(gopath, '/') + 1);
+@@ -352,9 +353,23 @@
+ 				exit(1);
+ 			}
+ 		} else if (!strcmp(argv[i], "-tvchan")) {
++                        if (tv_freq > 0) {
++                                fprintf(stderr, "You can use -tvfreq or -tvchan, not both.");
++                                exit(1);
++                        }
+ 			tv_freq = chan_to_freq(argv[++i]);
+ 			if (tv_freq < 0)
+ 				exit(1);
++                } else if (!strcmp(argv[i], "-tvfreq")) {
++                        if (tv_freq > 0) {
++                                fprintf(stderr, "You can use -tvfreq or -tvchan, not both.");
++                                exit(1);
++                        }
++                        float freq;
++                        sscanf (argv[++i], "%f", &freq);
++                        tv_freq = 16. * freq;
++                        if (tv_freq < 0)
++                                exit(1);
+ 		} else if (!strcmp(argv[i], "-tvaudio")) {
+ 			++i;
+ 			if (!strcasecmp(argv[i], "mono"))
