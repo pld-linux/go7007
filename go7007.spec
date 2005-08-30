@@ -1,6 +1,7 @@
 #
 # TODO:
 # - make licensing clear (especially for the firware)
+# - optflags for apps
 #
 # Conditional build:
 %bcond_without	dist_kernel	# allow non-distribution kernel
@@ -14,7 +15,7 @@
 %endif
 
 Summary:	Exemplary userspace program for go7007 video capture cards
-Summary(pl):	Przyk³adowy program dla kart przechwytywania video go7007
+Summary(pl):	Przyk³adowy program dla kart przechwytywania obrazu go7007
 Name:		go7007
 Version:	0.9.6
 %define		_rel	1
@@ -37,7 +38,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Exemplary userspace program for go7007 video capture cards.
 
 %description -l pl
-Przyk³adowy program dla kart przechwytywania video go7007.
+Przyk³adowy program dla kart przechwytywania obrazu go7007.
 
 %package devel
 Summary:	Header files for the go7007 driver
@@ -75,6 +76,7 @@ Requires(post,postun):	/sbin/depmod
 %requires_releq_kernel_up
 Requires(postun):	%releq_kernel_up
 %endif
+Requires:	go7007-firmware
 
 %description -n kernel-extra-go7007
 This is driver for go7007 for Linux.
@@ -92,12 +94,12 @@ Summary(pl):	Sterownik dla Linuksa SMP do go7007
 Release:	%{_rel}@%{_kernel_ver_str}
 License:	GPL v2
 Group:		Base/Kernel
-Requires:	go7007-firmware
 Requires(post,postun):	/sbin/depmod
 %if %{with dist_kernel}
 %requires_releq_kernel_smp
 Requires(postun):	%releq_kernel_smp
 %endif
+Requires:	go7007-firmware
 
 %description -n kernel-smp-extra-go7007
 This is driver for go7007 for Linux.
@@ -115,11 +117,11 @@ Ten pakiet zawiera modu³ j±dra Linuksa SMP.
 %patch1 -p1
 
 %build
-
+%if %{with userspace}
 sed 's,@FIRMWARE_DIR@,/lib/firmware,' < hotplug/wis-ezusb.in > hotplug/wis-ezusb
 
-%if %{with userspace}
-make -C apps CFLAGS="-I../include"
+%{__make} -C apps \
+	CFLAGS="-I../include"
 %endif
 
 %if %{with kernel}
@@ -153,7 +155,8 @@ done
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/lib/firmware/{,ezusb}
+%if %{with userspace}
+install -d $RPM_BUILD_ROOT/lib/firmware/ezusb
 install -p firmware/*.bin $RPM_BUILD_ROOT/lib/firmware
 install -p firmware/ezusb/*.hex $RPM_BUILD_ROOT/lib/firmware/ezusb
 
@@ -161,15 +164,14 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/hotplug/usb
 install hotplug/wis-ezusb $RPM_BUILD_ROOT%{_sysconfdir}/hotplug/usb/wis-ezusb
 install hotplug/wis.usermap-ezusb $RPM_BUILD_ROOT%{_sysconfdir}/hotplug/usb/wis.usermap
 
-%if %{with userspace}
 install -d $RPM_BUILD_ROOT/usr/bin
 install apps/gorecord $RPM_BUILD_ROOT/usr/bin
+
+install -d $RPM_BUILD_ROOT%{_includedir}/linux
+install include/*.h $RPM_BUILD_ROOT%{_includedir}/linux
 %endif
 
 %if %{with kernel}
-install -d $RPM_BUILD_ROOT%{_includedir}/linux
-install include/*.h $RPM_BUILD_ROOT%{_includedir}/linux
-
 install -d $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}{,smp}/extra
 cp kernel/ko-%{?with_dist_kernel:up}%{!?with_dist_kernel:nondist}/*.ko \
 	$RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}/extra
@@ -210,7 +212,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gorecord
-%endif
 
 %files devel
 %defattr(644,root,root,755)
@@ -221,3 +222,4 @@ rm -rf $RPM_BUILD_ROOT
 /lib/firmware/*
 %attr(755,root,root) %{_sysconfdir}/hotplug/usb/wis-ezusb
 %{_sysconfdir}/hotplug/usb/wis.usermap
+%endif
