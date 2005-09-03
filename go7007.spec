@@ -1,6 +1,6 @@
 #
 # TODO:
-# - make licensing clear (especially for the firware)
+# - make licensing clear (especially for the firmware)
 # - optflags for apps
 #
 # Conditional build:
