@@ -4,7 +4,7 @@
  fi
  
  $LOADER $FLAGS -I $FIRMWARE
-+$RETVAL=$?
++RETVAL=$?
  
 -if [ $? -gt 0 ]; then
 +if [ $RETVAL -gt 0 ]; then
