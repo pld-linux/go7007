@@ -18,7 +18,7 @@ Summary:	Exemplary userspace program for go7007 video capture cards
 Summary(pl):	Przyk³adowy program dla kart przechwytywania obrazu go7007
 Name:		go7007
 Version:	0.9.6
-%define		_rel	1
+%define		_rel	2
 Release:	%{_rel}
 License:	Public Domain
 Group:		Applications/Multimedia
