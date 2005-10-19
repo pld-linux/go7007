@@ -18,12 +18,13 @@ Summary:	Exemplary userspace program for go7007 video capture cards
 Summary(pl):	Przyk³adowy program dla kart przechwytywania obrazu go7007
 Name:		go7007
 Version:	0.9.6
-%define		_rel	2
+%define		_rel	3
 Release:	%{_rel}
 License:	Public Domain
 Group:		Applications/Multimedia
 Source0:	http://oss.wischip.com/wis-%{name}-linux-%{version}.tar.bz2
 # Source0-md5:	dac06ba7c410ac9ad8a3b2f27a03f7aa
+Source1:	%{name}-udev.rules
 Patch0:		%{name}-hotplug.patch
 Patch1:		%{name}-gorecord.patch
 URL:		http://oss.wischip.com/
@@ -169,6 +170,9 @@ install apps/gorecord $RPM_BUILD_ROOT/usr/bin
 
 install -d $RPM_BUILD_ROOT%{_includedir}/linux
 install include/*.h $RPM_BUILD_ROOT%{_includedir}/linux
+
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/udev/rules.d
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/udev/rules.d/100-go7007.rules
 %endif
 
 %if %{with kernel}
@@ -222,4 +226,5 @@ rm -rf $RPM_BUILD_ROOT
 /lib/firmware/*
 %attr(755,root,root) %{_sysconfdir}/hotplug/usb/wis-ezusb
 %{_sysconfdir}/hotplug/usb/wis.usermap
+%{_sysconfdir}/udev/rules.d/100-go7007.rules
 %endif
