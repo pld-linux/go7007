@@ -1,0 +1,4 @@
+SUBSYSTEM=="usb", SYSFS{idProduct}=="a002", SYSFS{idVendor}=="093b", RUN+="/etc/hotplug/usb/wis-ezusb"
+SUBSYSTEM=="usb", SYSFS{idProduct}=="a004", SYSFS{idVendor}=="093b", RUN+="/etc/hotplug/usb/wis-ezusb"
+SUBSYSTEM=="usb", SYSFS{idProduct}=="6666", SYSFS{idVendor}=="0eb1", RUN+="/etc/hotplug/usb/wis-ezusb"
+SUBSYSTEM=="usb", SYSFS{idProduct}=="6668", SYSFS{idVendor}=="0eb1", RUN+="/etc/hotplug/usb/wis-ezusb"
