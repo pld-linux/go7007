@@ -17,13 +17,13 @@
 Summary:	Exemplary userspace program for go7007 video capture cards
 Summary(pl):	Przyk³adowy program dla kart przechwytywania obrazu go7007
 Name:		go7007
-Version:	0.9.6
-%define		_rel	3
+Version:	0.9.7
+%define		_rel	0.1
 Release:	%{_rel}
 License:	Public Domain
 Group:		Applications/Multimedia
 Source0:	http://oss.wischip.com/wis-%{name}-linux-%{version}.tar.bz2
-# Source0-md5:	dac06ba7c410ac9ad8a3b2f27a03f7aa
+# Source0-md5:	eeae2af09c9563fb58a841517d669eb9
 Source1:	%{name}-udev.rules
 Patch0:		%{name}-hotplug.patch
 Patch1:		%{name}-gorecord.patch
@@ -122,7 +122,7 @@ Ten pakiet zawiera modu³ j±dra Linuksa SMP.
 sed 's,@FIRMWARE_DIR@,/lib/firmware,' < hotplug/wis-ezusb.in > hotplug/wis-ezusb
 
 %{__make} -C apps \
-	CFLAGS="-I../include"
+	CFLAGS="-I../include -I/usr/include/ncurses"
 %endif
 
 %if %{with kernel}
