@@ -14,11 +14,11 @@
 %undefine	with_dist_kernel
 %endif
 
+%define		_rel	0.1
 Summary:	Exemplary userspace program for go7007 video capture cards
 Summary(pl):	Przyk³adowy program dla kart przechwytywania obrazu go7007
 Name:		go7007
 Version:	0.9.7
-%define		_rel	0.1
 Release:	%{_rel}
 License:	Public Domain
 Group:		Applications/Multimedia
@@ -43,8 +43,8 @@ Przyk³adowy program dla kart przechwytywania obrazu go7007.
 
 %package devel
 Summary:	Header files for the go7007 driver
-Summary(pl):    Pliki nag³ówkowe dla sterownika go7007
-Group:          Development/Libraries
+Summary(pl):	Pliki nag³ówkowe dla sterownika go7007
+Group:		Development/Libraries
 Requires:	linux-libc-headers
 
 %description devel
@@ -57,7 +57,7 @@ Pliki nag³ówkowe dla sterownika go7007.
 Summary:	Firmware for the go7007 driver
 Summary(pl):	Firmware dla sterownika go7007
 License:	distributable
-Group:		System Environment/Kernel
+Group:		Base/Kernel
 Requires:	fxload
 
 %description firmware
@@ -139,7 +139,7 @@ for cfg in %{?with_dist_kernel:%{?with_smp:smp} up}%{!?with_dist_kernel:nondist}
 	ln -sf %{_kernelsrcdir}/include/linux/autoconf-$cfg.h kernel/include/linux/autoconf.h
 	ln -sf %{_kernelsrcdir}/include/asm-%{_target_base_arch} kernel/include/asm
 	touch kernel/include/config/MARKER
-	
+
 	%{__make} -C %{_kernelsrcdir} clean \
 		RCS_FIND_IGNORE="-name '*.ko' -o" \
 		M="$PWD/kernel" O="$PWD/kernel" \
@@ -165,8 +165,8 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/hotplug/usb
 install hotplug/wis-ezusb $RPM_BUILD_ROOT%{_sysconfdir}/hotplug/usb/wis-ezusb
 install hotplug/wis.usermap-ezusb $RPM_BUILD_ROOT%{_sysconfdir}/hotplug/usb/wis.usermap
 
-install -d $RPM_BUILD_ROOT/usr/bin
-install apps/gorecord $RPM_BUILD_ROOT/usr/bin
+install -d $RPM_BUILD_ROOT%{_bindir}
+install apps/gorecord $RPM_BUILD_ROOT%{_bindir}
 
 install -d $RPM_BUILD_ROOT%{_includedir}/linux
 install include/*.h $RPM_BUILD_ROOT%{_includedir}/linux
