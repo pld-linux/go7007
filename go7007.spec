@@ -29,7 +29,7 @@ Patch0:		%{name}-hotplug.patch
 Patch1:		%{name}-gorecord.patch
 URL:		http://oss.wischip.com/
 %if %{with kernel}
-%{?with_dist_kernel:BuildRequires:	kernel-module-build >= 2.6.7}
+%{?with_dist_kernel:BuildRequires:	kernel-module-build >= 3:2.6.7}
 BuildRequires:	rpmbuild(macros) >= 1.217
 %endif
 BuildRequires:	linux-libc-headers
@@ -133,7 +133,7 @@ for cfg in %{?with_dist_kernel:%{?with_smp:smp} up}%{!?with_dist_kernel:nondist}
 		exit 1
 	fi
 	rm -rf kernel/include/{linux,config,asm}
-        rm -f kernel/.config
+	rm -f kernel/.config
 	install -d kernel/include/{linux,config}
 	ln -sf %{_kernelsrcdir}/config-$cfg kernel/.config
 	ln -sf %{_kernelsrcdir}/include/linux/autoconf-$cfg.h kernel/include/linux/autoconf.h
