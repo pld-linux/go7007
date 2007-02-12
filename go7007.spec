@@ -16,7 +16,7 @@
 
 %define		_rel	0.1
 Summary:	Exemplary userspace program for go7007 video capture cards
-Summary(pl):	Przyk≥adowy program dla kart przechwytywania obrazu go7007
+Summary(pl.UTF-8):   Przyk≈Çadowy program dla kart przechwytywania obrazu go7007
 Name:		go7007
 Version:	0.9.7
 Release:	%{_rel}
@@ -38,24 +38,24 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Exemplary userspace program for go7007 video capture cards.
 
-%description -l pl
-Przyk≥adowy program dla kart przechwytywania obrazu go7007.
+%description -l pl.UTF-8
+Przyk≈Çadowy program dla kart przechwytywania obrazu go7007.
 
 %package devel
 Summary:	Header files for the go7007 driver
-Summary(pl):	Pliki nag≥Ûwkowe dla sterownika go7007
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe dla sterownika go7007
 Group:		Development/Libraries
 Requires:	linux-libc-headers
 
 %description devel
 Header files for the go7007 driver.
 
-%description devel -l pl
-Pliki nag≥Ûwkowe dla sterownika go7007.
+%description devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe dla sterownika go7007.
 
 %package firmware
 Summary:	Firmware for the go7007 driver
-Summary(pl):	Firmware dla sterownika go7007
+Summary(pl.UTF-8):   Firmware dla sterownika go7007
 License:	distributable
 Group:		Base/Kernel
 Requires:	fxload
@@ -63,12 +63,12 @@ Requires:	fxload
 %description firmware
 Firmware for the go7007 driver.
 
-%description firmware -l pl
+%description firmware -l pl.UTF-8
 Firmware dla sterownika go7007.
 
 %package -n kernel-extra-go7007
 Summary:	Linux driver for go7007
-Summary(pl):	Sterownik dla Linuksa do go7007
+Summary(pl.UTF-8):   Sterownik dla Linuksa do go7007
 Release:	%{_rel}@%{_kernel_ver_str}
 License:	GPL v2
 Group:		Base/Kernel
@@ -84,14 +84,14 @@ This is driver for go7007 for Linux.
 
 This package contains Linux module.
 
-%description -n kernel-extra-go7007 -l pl
+%description -n kernel-extra-go7007 -l pl.UTF-8
 Sterownik dla Linuksa do go7007.
 
-Ten pakiet zawiera modu≥ j±dra Linuksa.
+Ten pakiet zawiera modu≈Ç jƒÖdra Linuksa.
 
 %package -n kernel-smp-extra-go7007
 Summary:	Linux SMP driver for go7007
-Summary(pl):	Sterownik dla Linuksa SMP do go7007
+Summary(pl.UTF-8):   Sterownik dla Linuksa SMP do go7007
 Release:	%{_rel}@%{_kernel_ver_str}
 License:	GPL v2
 Group:		Base/Kernel
@@ -107,10 +107,10 @@ This is driver for go7007 for Linux.
 
 This package contains Linux SMP module.
 
-%description -n kernel-smp-extra-go7007 -l pl
+%description -n kernel-smp-extra-go7007 -l pl.UTF-8
 Sterownik dla Linuksa do go7007.
 
-Ten pakiet zawiera modu≥ j±dra Linuksa SMP.
+Ten pakiet zawiera modu≈Ç jƒÖdra Linuksa SMP.
 
 %prep
 %setup -q -n wis-%{name}-linux-%{version}
