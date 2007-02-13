@@ -16,7 +16,7 @@
 
 %define		_rel	0.1
 Summary:	Exemplary userspace program for go7007 video capture cards
-Summary(pl.UTF-8):   Przykładowy program dla kart przechwytywania obrazu go7007
+Summary(pl.UTF-8):	Przykładowy program dla kart przechwytywania obrazu go7007
 Name:		go7007
 Version:	0.9.7
 Release:	%{_rel}
@@ -43,7 +43,7 @@ Przykładowy program dla kart przechwytywania obrazu go7007.
 
 %package devel
 Summary:	Header files for the go7007 driver
-Summary(pl.UTF-8):   Pliki nagłówkowe dla sterownika go7007
+Summary(pl.UTF-8):	Pliki nagłówkowe dla sterownika go7007
 Group:		Development/Libraries
 Requires:	linux-libc-headers
 
@@ -55,7 +55,7 @@ Pliki nagłówkowe dla sterownika go7007.
 
 %package firmware
 Summary:	Firmware for the go7007 driver
-Summary(pl.UTF-8):   Firmware dla sterownika go7007
+Summary(pl.UTF-8):	Firmware dla sterownika go7007
 License:	distributable
 Group:		Base/Kernel
 Requires:	fxload
@@ -68,7 +68,7 @@ Firmware dla sterownika go7007.
 
 %package -n kernel-extra-go7007
 Summary:	Linux driver for go7007
-Summary(pl.UTF-8):   Sterownik dla Linuksa do go7007
+Summary(pl.UTF-8):	Sterownik dla Linuksa do go7007
 Release:	%{_rel}@%{_kernel_ver_str}
 License:	GPL v2
 Group:		Base/Kernel
@@ -91,7 +91,7 @@ Ten pakiet zawiera moduł jądra Linuksa.
 
 %package -n kernel-smp-extra-go7007
 Summary:	Linux SMP driver for go7007
-Summary(pl.UTF-8):   Sterownik dla Linuksa SMP do go7007
+Summary(pl.UTF-8):	Sterownik dla Linuksa SMP do go7007
 Release:	%{_rel}@%{_kernel_ver_str}
 License:	GPL v2
 Group:		Base/Kernel
