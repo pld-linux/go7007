@@ -115,8 +115,8 @@ Ten pakiet zawiera moduł jądra Linuksa SMP.
 
 %prep
 %setup -q -n wis-%{name}-linux-%{version}
-%patch0 -p1
-%patch1 -p1
+%patch -P0 -p1
+%patch -P1 -p1
 
 %build
 %if %{with userspace}
